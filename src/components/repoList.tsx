@@ -54,18 +54,28 @@ function RepoList() {
    */
   const fetchList = async () => {
     setLoading(true);
-    await fetch(`https://api.github.com/users/${username}/repos`)
+    const url = new URL(`https://api.github.com/users/${username}/repos`),
+      params: any = { page: listPage, per_page: 10 };
+    Object.keys(params).forEach((key) =>
+      url.searchParams.append(key, params[key])
+    );
+
+    await fetch(url.toString())
       .then((response) => {
-        return response.json();
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error("Repository not found");
       })
       .then((result) => {
-        console.log(result);
         setLoading(false);
-        setList((prev) => [...prev, ...result]);
-        if (result.length === 0) {
-          setErrorMessage("Repository Not Found");
-        } else {
+        if (result && result?.length !== 0) {
+          setList((prev) => [...prev, ...result]);
           setErrorMessage("");
+        } else if (result && result?.length === 0) {
+          setErrorMessage("No more repos to load");
+        } else {
+          setErrorMessage("Repository not found");
         }
       })
       .catch((error) => {
@@ -157,7 +167,10 @@ function RepoList() {
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell align="center">
-                  <Link to={`/users/${username}/repos/${row.name}`}>
+                  <Link
+                    to={`/users/${username}/repos/${row.name}`}
+                    style={{ textDecoration: "none" }}
+                  >
                     <Button variant="outlined">{row.name}</Button>
                   </Link>
                   {/* <Button variant="outlined">{row.name}</Button> */}

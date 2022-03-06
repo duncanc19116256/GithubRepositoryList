@@ -8,8 +8,10 @@ function Help() {
       Use the search field to get a list of public repositories under an
       existing Github user. The list will only display 10 repositories max on
       first load. Once you scroll to the bottom, it will reload the next 10
-      repositories, and so on (until there are no more repositories). <br />{" "}
-      <br />
+      repositories, and so on (until there are no more repositories). <br /> If
+      you see **No more repos to load**, that means the existing user has no
+      other repositories to be loaded.
+      <br /> <br />
       Click on &quot;Name&quot; to get more details about the specific repo.{" "}
       <br /> <br />
       Once you are routed to the page that displays the detail (repo fullname,
