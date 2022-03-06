@@ -1,0 +1,7 @@
+.descContainer {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+
+  width: 80%;
+}

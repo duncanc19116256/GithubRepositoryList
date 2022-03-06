@@ -1,0 +1,14 @@
+.headerContainer {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  background-color: #2d69a5;
+  height: 88px;
+  align-items: center;
+  justify-content: space-around;
+  color: #ffffff;
+  font-size: 1.875em;
+  font: "Verdana";
+  margin-bottom: 10px;
+  padding: 5px 0;
+}
