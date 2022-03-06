@@ -66,7 +66,6 @@ function RepoList() {
         } else {
           setErrorMessage("");
         }
-        console.log("result:", result);
       })
       .catch((error) => {
         setErrorMessage(error.message);
@@ -98,6 +97,8 @@ function RepoList() {
         fetchList();
       }
     } else {
+      setList([]);
+      setListPage(1);
       setErrorMessage("Username cannot be empty!");
     }
   }, [username, listPage]);
