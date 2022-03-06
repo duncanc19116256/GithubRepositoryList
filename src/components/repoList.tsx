@@ -54,21 +54,22 @@ function RepoList() {
    */
   const fetchList = async () => {
     setLoading(true);
-    fetch(`https://api.github.com/users/${username}/repos`)
+    await fetch(`https://api.github.com/users/${username}/repos`)
       .then((response) => {
         return response.json();
       })
       .then((result) => {
+        console.log(result);
         setLoading(false);
-        setList((prev) => [...prev, ...result]);
-        if (result.length === 0) {
-          setErrorMessage("Repository Not Found");
-        } else {
+        if (!result.error && result.length === 0) {
           setErrorMessage("");
+          setList((prev) => [...prev, ...result]);
+        } else {
+          setErrorMessage("Repository Not Found");
         }
       })
       .catch((error) => {
-        setErrorMessage(error.message);
+        setErrorMessage(error);
       });
   };
 

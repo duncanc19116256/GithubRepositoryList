@@ -17,7 +17,7 @@ function RepoDetails() {
    *
    */
   const fetchRepo = async () => {
-    fetch(`https://api.github.com/repos/${owner}/${repo}`)
+    await fetch(`https://api.github.com/repos/${owner}/${repo}`)
       .then((response) => response.json())
       .then((result) => {
         setRepo(result);
