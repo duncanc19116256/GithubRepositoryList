@@ -37,7 +37,7 @@ function RepoList() {
 
   const [errorMessage, setErrorMessage] = useState("");
   const octokit = new Octokit({
-    auth: `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`,
+    auth: `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`,
   });
 
   /*

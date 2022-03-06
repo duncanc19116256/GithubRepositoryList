@@ -10,7 +10,7 @@ import { Card, CardContent, Button, Typography } from "@mui/material";
 function RepoDetails() {
   const [repoDetails, setRepo] = useState<any>({});
   const octokit = new Octokit({
-    auth: `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`,
+    auth: `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`,
   });
   const { owner, repo } = useParams();
 
