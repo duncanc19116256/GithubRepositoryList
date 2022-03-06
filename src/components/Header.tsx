@@ -8,9 +8,9 @@ function Header(props: any) {
   const { onHelpClick } = props;
   return (
     <div className={hStyle.headerContainer}>
-      <br />
-      <div>Github Repository List Search</div>
-      <div>
+      <div className={hStyle.sideItem} />
+      <div className={hStyle.item}>Github Repository List Search</div>
+      <div className={hStyle.sideItem}>
         <Button
           startIcon={<HelpIcon />}
           onClick={onHelpClick}

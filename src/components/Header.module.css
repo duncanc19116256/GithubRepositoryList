@@ -12,3 +12,11 @@
   margin-bottom: 10px;
   padding: 5px 0;
 }
+
+.item {
+  width: 80%;
+}
+
+.sideItem {
+  width: 10%;
+}
