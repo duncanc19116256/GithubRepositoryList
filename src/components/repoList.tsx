@@ -61,15 +61,15 @@ function RepoList() {
       .then((result) => {
         console.log(result);
         setLoading(false);
-        if (!result.error && result.length === 0) {
-          setErrorMessage("");
-          setList((prev) => [...prev, ...result]);
-        } else {
+        setList((prev) => [...prev, ...result]);
+        if (result.length === 0) {
           setErrorMessage("Repository Not Found");
+        } else {
+          setErrorMessage("");
         }
       })
       .catch((error) => {
-        setErrorMessage(error);
+        setErrorMessage(error.message);
       });
   };
 
