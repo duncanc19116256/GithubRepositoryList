@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Octokit } from "@octokit/core";
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import GitHubIcon from "@mui/icons-material/GitHub";
@@ -9,9 +8,7 @@ import { Card, CardContent, Button, Typography } from "@mui/material";
 
 function RepoDetails() {
   const [repoDetails, setRepo] = useState<any>({});
-  const octokit = new Octokit({
-    auth: `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`,
-  });
+
   const { owner, repo } = useParams();
 
   /*
@@ -20,13 +17,10 @@ function RepoDetails() {
    *
    */
   const fetchRepo = async () => {
-    await octokit
-      .request("GET /repos/{username}/{repository}", {
-        username: owner,
-        repository: repo,
-      })
-      .then((response) => {
-        setRepo(response.data);
+    fetch(`https://api.github.com/repos/${owner}/${repo}`)
+      .then((response) => response.json())
+      .then((result) => {
+        setRepo(result);
       })
       .catch((error) => {
         console.log("error", error.message);

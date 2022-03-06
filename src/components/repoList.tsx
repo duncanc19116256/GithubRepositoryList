@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 
-import { Octokit } from "@octokit/core";
 import {
   useEffect,
   useLayoutEffect,
@@ -36,9 +35,6 @@ function RepoList() {
   const [loading, setLoading] = useState(false);
 
   const [errorMessage, setErrorMessage] = useState("");
-  const octokit = new Octokit({
-    auth: `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`,
-  });
 
   /*
    *  handleUsernameChange(): This function handles the state change of username
@@ -58,20 +54,19 @@ function RepoList() {
    */
   const fetchList = async () => {
     setLoading(true);
-    await octokit
-      .request("GET /users/{owner}/repos", {
-        owner: username,
-        per_page: 10,
-        page: listPage,
-      })
+    fetch(`https://api.github.com/users/${username}/repos`)
       .then((response) => {
-        setList((prev) => [...prev, ...response.data]);
-        if (response.data.length === 0) {
+        return response.json();
+      })
+      .then((result) => {
+        setLoading(false);
+        setList((prev) => [...prev, ...result]);
+        if (result.length === 0) {
           setErrorMessage("Repository Not Found");
         } else {
           setErrorMessage("");
         }
-        setLoading(false);
+        console.log("result:", result);
       })
       .catch((error) => {
         setErrorMessage(error.message);
