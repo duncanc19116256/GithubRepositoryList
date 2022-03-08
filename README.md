@@ -1,46 +1,35 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This page has been deployed onto Heroku: 
+https://githubrepositorylist.herokuapp.com/
 
-## Available Scripts
+## MAIN COMPONENTS EXPLAINED:
+App.tsx maintains ./components/Header.tsx and routes the user to two different 
+pages based on user actions:
+- ./components/repoList.tsx
+  This is the main page where user can lookup public repositories belonged to 
+  an existing user. The list loads the first 10 repositories, and would load 
+  another 10 (if exists) when the user scrolls to the bottom of the list. 
+  Instead of octokit (which requires personal authentication token), this page 
+  uses fetch to make requests from Github's REST API 
+  (GET /users/{username}/repos). It makes a new request whenever the username
+  field is changed, which creates a better user experience compared to making
+  a request upon "enter" is clicked. However, with the high amount of API 
+  request rate, Github would eventually returns a 403 error message. 
 
-In the project directory, you can run:
+- ./components/repoDetails.tsx
+  This page is displayed when user clicks on a speicifc repo from the list 
+  shown in the main page. A fetch request to Github's REST API is also used 
+  (GET /repos/{owner}/{repo}). The page shows the fullname, description, and 
+  stargazers_count of that specific repo. The two buttoms allows user to open
+  the Github page on a new tab or return to the list of repos respectively. 
 
-### `npm start`
+## SPECIFICATION DISPLAYED IN THE HELP PAGE (./components/Help.tsx):
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Use the search field to get a list of public repositories under an existing Github user. The list will only display 10 repositories max on first load. Once you scroll to the bottom, it will reload the next 10 repositories, and so on (until there are no more repositories).
+If you see **No more repos to load**, that means the existing user has no other repositories to be loaded.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Click on "Name" to get more details about the specific repo.
 
-### `npm test`
+Once you are routed to the page that displays the detail (repo fullname, description, and stargazers_count), you also have the option to return to the original list, or to open the github page in a new tab.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
