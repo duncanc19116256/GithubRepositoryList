@@ -24,7 +24,7 @@ function App() {
           <Route path="/users/:owner/repos/:repo" element={<RepoDetails />} />
           <Route path="/users/:owner/repos" element={<RepoList />} />
           <Route path="/users//repos" element={<RepoList />} />
-          <Route path="/" element={<RepoList />} />
+          <Route path="/*" element={<RepoList />} />
         </Routes>
       </BrowserRouter>
       <Backdrop
